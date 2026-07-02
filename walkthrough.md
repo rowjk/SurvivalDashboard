@@ -92,3 +92,18 @@
 * **系統架構圖**：已於 `README.md` 新增以 Mermaid 繪製的系統元件架構圖，包含前端 UI/Iframe/Sidebar 與後端 Core/Security/Cache/Database 關係。
 * **功能文件同步**：補充了 2FA TOTP 驗證登入、地標 Option B 種子防重灌機制、表格隱藏 UUID、標題單車點擊轉向與 XSS 防禦機制的說明。
 * **部署歷史**：已依指令執行 `git push`，成功將最新文件提交發布至 GitHub 遠端倉庫。
+
+---
+
+## 🔒 Google Maps API 金鑰外洩調查與安全重設紀錄 (2026-07-02)
+
+* **異常分析**：
+  - 用戶反映其 Google Maps API 於 6/16 產生異常扣費。
+  - 經比對 Git 歷史與對話紀錄，確認於 6/3 的 Commit `3f3b4ca` 中，由於實作 Google Maps JavaScript API，不慎將 `api_key` 以 `<script src="...">` 的形式渲染在前端瀏覽器 HTML 中。
+  - 由於 Streamlit 應用為公開部署，導致金鑰在 3 分鐘的漏洞窗口期內被自動化爬蟲擷取並遭到濫用。
+* **安全修復與重設**：
+  - 指引並協助用戶於 Google Cloud Console 撤銷/刪除已被洩露的舊金鑰。
+  - 指引並協助用戶在專案中啟用 **Geocoding API**，並建立新金鑰。
+  - 將新金鑰限制為僅能存取 **Places API** 與 **Geocoding API**，防止被挪作其他高額 API 的盜刷用途。
+  - 本地 [.env](file:///c:/Users/james_wu/Documents/Antigravity_Project/Survival%20Dashboard/.env) 設定檔已成功更新為新金鑰。目前地圖與餐廳評論服務運作正常。
+  - 提供用戶向 Google Cloud Billing 申訴退款的詳細說法與指引。
