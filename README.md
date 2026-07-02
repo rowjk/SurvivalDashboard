@@ -140,8 +140,6 @@ graph TD
 1. 本專案已初始化 Git 版本控制，並排除敏感環境設定（`.env`）與本地資料庫檔案（`dashboard.db`），確保代碼庫的乾淨與安全。
 2. **遵守嚴格的部署權限規範**：除非使用者明確發出指令要求（如「上git」、「commit」、「push」），否則地端 Agent 絕對不會擅自對 GitHub 倉庫進行任何提交與推送操作。
 
-* **GitHub 遠端倉庫位址**：`https://github.com/rowjk/SurvivalDashboard`
-* **Demo**：`https://survivaldashboard.streamlit.app/`
 
 
 
